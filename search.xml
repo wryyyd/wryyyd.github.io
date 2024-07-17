@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>P1247题解</title>
-    <url>/project/posts/b2bcbd52/</url>
+    <url>/posts/b2bcbd52/</url>
     <content><![CDATA[<p>&emsp;对于取火柴的题目，就是取石子即Nim均衡，如果每个堆的大小异或起来为0，那么此时必输，那么找必胜策略的方法为对于其中一个堆，取出石子使得剩下的石子的个数等于其余堆的异或和。<br><span id="more"></span><br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> k, a[MAXN];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) tmp = tmp ^ a[i];</span><br><span class="line">    <span class="keyword">if</span> (!tmp) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;lose\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">        <span class="type">int</span> x = a[i] ^ tmp;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; a[i]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, a[i] - x, i);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= k; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j == i) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, x);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
@@ -16,7 +16,7 @@
   </entry>
   <entry>
     <title>P2254题解</title>
-    <url>/project/posts/a4c91c52/</url>
+    <url>/posts/a4c91c52/</url>
     <content><![CDATA[<p> 题面中的魔法的含义是1900在该时间段的最大滑动距离是时间段的长度，并不关心具体在哪个位置时使用了魔法使得1900暂停（题目没问，且对于一条可行的路径，其使用魔法的可行选项并不唯一）。</p>
 <p> 故可以不按照时间进行枚举，而是对于时间段进行枚举，（减少必须枚举的数量），将一个时间段内依次枚举改为找到一个时间段内可能对于当前点产生贡献的点并找到其中的最大值</p>
 <p> 那么对于第<span class="math inline">\(i\)</span>个时间段<span
@@ -52,7 +52,7 @@ class="math inline">\(\Theta(KNM)\)</span>，由于更新方程只与上一个�
   </entry>
   <entry>
     <title>P2157题解</title>
-    <url>/project/posts/acac3a0a/</url>
+    <url>/posts/acac3a0a/</url>
     <content><![CDATA[<p>​ 当前是否选择第<span
 class="math inline">\(i\)</span>个人取吃饭受到他之前的人和他之后的人影响，不符合无后效性的定义，而他之后的人根据题目要求最多只有8个，可以考虑使用状态压缩，把第<span
 class="math inline">\(i\)</span>个人和其后面7个人是否吃饭作为状态进行压缩，故DP的一个维度为状态，大小为256。</p>
@@ -107,7 +107,7 @@ f[1][0][7]=0
   </entry>
   <entry>
     <title>P2607题解</title>
-    <url>/project/posts/802d59a7/</url>
+    <url>/posts/802d59a7/</url>
     <content><![CDATA[<p> 对于这道题，可以明确的是，这道题和没有上司的舞会是一致的（升级版）。这道题的改变在于，这个图中会出现简单的环，且这个环不会出现环中环的情况，故可以不去找桥，而是直接把这个环中选择一条边，强制删去，然后剩余的连通块可以看作一颗树，与没有上司的舞会是一样的。而对于整个连通块答案的统计可以选择被删去边两侧的点，依次枚举两者不被选择的情况。（保证不会冲突，如果枚举两个点被选取的情况，因为DP的无后效性，会出现A点被选取，但是B点因为一条边被删去，故同样的被选取的情况。）（只枚举不被选取的情况的正确性还可以有A，B中有边相连，可能出现的情况只有三种，（选A）（选B）（A，B都不要））</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 1000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> next,to;</span><br><span class="line">&#125;e[<span class="number">2</span>*MAXN];</span><br><span class="line"><span class="type">int</span> head[MAXN],cnt,val[MAXN];</span><br><span class="line"><span class="type">int</span> vis[MAXN],n;</span><br><span class="line"><span class="type">int</span> S,T,cut_edge[<span class="number">2</span>*MAXN],flag;</span><br><span class="line">LL f[MAXN][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addedge</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[cnt].next=head[u];</span><br><span class="line">    e[cnt].to=v;</span><br><span class="line">    head[u]=cnt;</span><br><span class="line">    cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vis[u]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=head[u];i!=<span class="number">-1</span>;i=e[i].next)&#123;</span><br><span class="line">        <span class="type">int</span> v=e[i].to;</span><br><span class="line">        <span class="comment">// printf(&quot;%d %d\n&quot;,u,v);</span></span><br><span class="line">        <span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(vis[v])&#123;</span><br><span class="line">            S=u;T=v;</span><br><span class="line">            cut_edge[i]=cut_edge[i^<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">dfs</span>(v,u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getans</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[u][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    f[u][<span class="number">1</span>]=val[u];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=head[u];i!=<span class="number">-1</span>;i=e[i].next)&#123;</span><br><span class="line">        <span class="type">int</span> to=e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(to==fa||cut_edge[i]!=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">getans</span>(to,u);</span><br><span class="line">        f[u][<span class="number">0</span>]+=(LL)<span class="built_in">max</span>(f[to][<span class="number">0</span>],f[to][<span class="number">1</span>]);</span><br><span class="line">        f[u][<span class="number">1</span>]+=(LL)f[to][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="built_in">sizeof</span>(head));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;val[i],&amp;tmp);</span><br><span class="line">        <span class="built_in">addedge</span>(i,tmp);</span><br><span class="line">        <span class="built_in">addedge</span>(tmp,i);</span><br><span class="line">    &#125;</span><br><span class="line">    LL ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(i,<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">getans</span>(S,<span class="number">0</span>);</span><br><span class="line">        LL temp = f[S][<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">getans</span>(T,<span class="number">0</span>);</span><br><span class="line">        temp = <span class="built_in">max</span>(temp,f[T][<span class="number">0</span>]);</span><br><span class="line">        ans += temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -122,13 +122,13 @@ f[1][0][7]=0
   </entry>
   <entry>
     <title>P1542题解</title>
-    <url>/project/posts/84e5ff3c/</url>
+    <url>/posts/84e5ff3c/</url>
     <content><![CDATA[<p> 这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。</p>
 ]]></content>
   </entry>
   <entry>
     <title>P2742题解</title>
-    <url>/project/posts/41246cb9/</url>
+    <url>/posts/41246cb9/</url>
     <content><![CDATA[<h2 id="暴力">暴力</h2>
 <p> 对于求凸包的题，暴力的方法，从最左下的点开始，旋转一条边，找所有的点中最早与这条边重合的，这样做时间复杂度为<span
 class="math inline">\(\Theta(nm)\)</span></p>
@@ -196,7 +196,7 @@ class="math inline">\(x\)</span>轴坐标的大小排序，判断过程一致，
   </entry>
   <entry>
     <title>P1972题解</title>
-    <url>/project/posts/ec5e0bcb/</url>
+    <url>/posts/ec5e0bcb/</url>
     <content><![CDATA[<p> 这道题需要明确的是，查询的是种类个数，故多个相同种类的点带来的贡献只有一个有效。假设只有最右端有效，那么从左到右依次更改，出现一个新的种类时，删去原来位置上的贡献，更新当前位置上的贡献。更改到第
 i个的时候，那么对于这个区间，可以采用前缀和的方式求得所有的右区间为i的查询的结果，因为假设一个类别出现在L左侧和右侧，那么根据更新规则，一定是在L右侧的点产生贡献，保证不漏，不出现在L右侧的点，不会在<span
 class="math inline">\([L,R]\)</span>之间产生贡献。采用区间查询的方式，一次性告诉所有查询，可以采用离线查询后返回的方式得到答案。故采用每个区间最右侧作为排序基准。每次修改的只是一个点，只用枚举完整个序列，为<span
@@ -206,7 +206,7 @@ class="math inline">\(\Theta(n)\)</span>.
   </entry>
   <entry>
     <title>P3377题解</title>
-    <url>/project/posts/2fbd7ecf/</url>
+    <url>/posts/2fbd7ecf/</url>
     <content><![CDATA[<p> 这是一个基本的左偏树(可并堆)的模板，左偏树就是定义了距离<span
 class="math inline">\(dist\)</span>，要求左子树的<span
 class="math inline">\(dist\)</span>大于右子树的<span
