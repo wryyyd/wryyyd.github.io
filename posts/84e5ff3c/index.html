@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/project/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/project/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"wryyyd.github.io","root":"/project/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="​&emsp;当前是否选择第$i$个人取吃饭受到他之前的人和他之后的人影响，不符合无后效性的定义，而他之后的人根据题目要求最多只有8个，可以考虑使用状态压缩，把第$i$个人和其后面7个人是否吃饭作为状态进行压缩，故DP的一个维度为状态，大小为256。 ​&emsp;不妨取第一维$i$表示前$i$-1个人都吃完成，第二维$j$表示第$i$个人和他后面7个人是否吃饭的状态，采用小端表示，即表示第$i$">
+  <meta name="description" content="这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P2157题解">
-<meta property="og:url" content="http://example.com/2024/07/17/P2157%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="P1542题解">
+<meta property="og:url" content="https://wryyyd.github.io/project/posts/84e5ff3c/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="​&emsp;当前是否选择第$i$个人取吃饭受到他之前的人和他之后的人影响，不符合无后效性的定义，而他之后的人根据题目要求最多只有8个，可以考虑使用状态压缩，把第$i$个人和其后面7个人是否吃饭作为状态进行压缩，故DP的一个维度为状态，大小为256。 ​&emsp;不妨取第一维$i$表示前$i$-1个人都吃完成，第二维$j$表示第$i$个人和他后面7个人是否吃饭的状态，采用小端表示，即表示第$i$">
+<meta property="og:description" content="这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-17T03:17:09.000Z">
-<meta property="article:modified_time" content="2024-07-17T03:50:15.017Z">
+<meta property="article:published_time" content="2024-07-17T03:16:54.000Z">
+<meta property="article:modified_time" content="2024-07-17T06:01:39.451Z">
 <meta property="article:author" content="DCH">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/07/17/P2157%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="https://wryyyd.github.io/project/posts/84e5ff3c/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>P2157题解 | Hexo</title>
+  <title>P1542题解 | Hexo</title>
   
 
 
@@ -94,7 +94,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/project/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">Hexo</h1>
       <span class="logo-line-after"><i></i></span>
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -114,29 +115,56 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -160,10 +188,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/17/P2157%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/84e5ff3c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/project/images/avatar.gif">
       <meta itemprop="name" content="DCH">
       <meta itemprop="description" content="">
     </span>
@@ -173,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          P2157题解
+          P1542题解
         </h1>
 
         <div class="post-meta">
@@ -184,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-17 11:17:09 / 修改时间：11:50:15" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:09+08:00">2024-07-17</time>
+              <time title="创建时间：2024-07-17 11:16:54 / 修改时间：14:01:39" itemprop="dateCreated datePublished" datetime="2024-07-17T11:16:54+08:00">2024-07-17</time>
             </span>
 
           
@@ -198,21 +226,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>​&emsp;当前是否选择第$i$个人取吃饭受到他之前的人和他之后的人影响，不符合无后效性的定义，而他之后的人根据题目要求最多只有8个，可以考虑使用状态压缩，把第$i$个人和其后面7个人是否吃饭作为状态进行压缩，故DP的一个维度为状态，大小为256。</p>
-<p>​&emsp;不妨取第一维$i$表示前$i$-1个人都吃完成，第二维$j$表示第$i$个人和他后面7个人是否吃饭的状态，采用小端表示，即表示第$i$个人的二进制位为最低位（主要是方便）。</p>
-<p>​&emsp;因为更新权值需要知道上一个吃饭的是谁，故需要第三维表示上一个吃饭的是谁，为了保证全局最优解，故需要记录状态，而非仅记录当前产生贡献（最大值）中选取的上一个吃饭的是谁，虽然第1维表示前面$i$-1个人吃了饭，但是前面的人吃饭顺序不确定，所以这一维度需要表示的范围从第$i$个人的前到第$i$个人的后。而最大的容忍插队是8个，故如果当前要选择第$i$个人吃饭，那么必然上一个吃饭的人的范围在第$i$个人前8个之间，否则不符合仅允许后$B_i$个人吃饭的要求。故第三维的范围为$[-8,7]$，为了使得数组下标不为负，那么可以修改范围为$[0,15]$</p>
-<p>​&emsp;故可以把DP方程写为</p>
-<script type="math/tex; mode=display">
-f[i][j][k]</script><p>​&emsp;那么对于DP方程的转移，首先如何转移第一维的值。根据第一维的规则，$i$表示前$i$-1个人吃完饭，可知如果第$i$个人吃完饭了，就可以进行转移，即$j$的最低位为1时，就可以转移了，所以转移的规则为</p>
-<script type="math/tex; mode=display">
-f[i+1][j>>1][k-1] = min(f[i+1][j>>1][k-1],f[i][j][k])\quad (j\&1==1)</script><p>​&emsp;在这种情况下，$f[i+1][j&gt;&gt;1][k-1]$与$f[i][j][k]$等价，故优先转移第一维，使用$f[i+1][j&gt;&gt;1][k-1]$对于后续的情况进行更新，减少了第一维转移的个数。</p>
-<p>​&emsp;对于$j$最后一位不为1的情况，可以枚举当前吃饭的是谁，即选择$j$中二进制位为0的位置，让这个位置的人吃饭，那么更新规则为</p>
-<script type="math/tex; mode=display">
-f[i][j|(1<<z)][k] = min(f[i][j|(1<<z)][k],f[i][j][k]+T[i+z]\oplus T[i+k])\quad (j\&1!=1)</script><p>​&emsp;那么$i+z$上的人能否吃饭受到第$i$个人容许的限度和$[i+1,i+z-1]$之间没有吃饭的人的容许限度的限制。即$z$的选择大小需要考虑他到$i$之间没有吃饭的人的容许情况。（这一点不考虑完整只考虑i的容许的话只有32%的正确）。</p>
-<p>​&emsp;在更新时，还需要考虑是否是第一个人，第一个人不计算时间。</p>
-<p>​&emsp;根据上式转移方程，那么初始值可以选择为</p>
-<script type="math/tex; mode=display">
-f[1][0][7]=0</script><p>表示当前进行到第一个人，当前状态是0，上一个吃饭的人设置为第0个人，表示不存在。</p>
+        <p> 这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。</p>
 
     </div>
 
@@ -228,12 +242,12 @@ f[1][0][7]=0</script><p>表示当前进行到第一个人，当前状态是0，�
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/07/17/P1972%E9%A2%98%E8%A7%A3/" rel="prev" title="P1972题解">
-      <i class="fa fa-chevron-left"></i> P1972题解
+    <a href="/project/posts/b2bcbd52/" rel="prev" title="P1247题解">
+      <i class="fa fa-chevron-left"></i> P1247题解
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/07/17/P2254%E9%A2%98%E8%A7%A3/" rel="next" title="P2254题解">
-      P2254题解 <i class="fa fa-chevron-right"></i>
+    <a href="/project/posts/ec5e0bcb/" rel="next" title="P1972题解">
+      P1972题解 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -304,11 +318,23 @@ f[1][0][7]=0</script><p>表示当前进行到第一个人，当前状态是0，�
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+          <a href="/project/archives/">
         
           <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/project/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/project/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -357,19 +383,19 @@ f[1][0][7]=0</script><p>表示当前进行到第一个人，当前状态是0，�
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/project/lib/anime.min.js"></script>
+  <script src="/project/lib/velocity/velocity.min.js"></script>
+  <script src="/project/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="/project/js/utils.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
+<script src="/project/js/motion.js"></script>
 
 
-<script src="/js/next-boot.js"></script>
+<script src="/project/js/schemes/muse.js"></script>
+
+
+<script src="/project/js/next-boot.js"></script>
 
 
 
@@ -377,6 +403,10 @@ f[1][0][7]=0</script><p>表示当前进行到第一个人，当前状态是0，�
   
 
 
+
+
+  
+<script src="/project/js/local-search.js"></script>
 
 
 

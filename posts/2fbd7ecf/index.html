@@ -5,36 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/project/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/project/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"wryyyd.github.io","root":"/project/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="暴力&emsp;对于求凸包的题，暴力的方法，从最左下的点开始，旋转一条边，找所有的点中最早与这条边重合的，这样做时间复杂度为$\Theta(nm)$ Graham&emsp;考虑优化枚举顺序，使得每次不用重新判断每个点是否出现在这条线上，可以发现，一个凸包从左下角开始，逆时针依次枚举，路径上的点与左下角组成的直线角度逐渐增大，可以在选取了左下点后，以左下角与其他点组成的向量的角度大小作为排序基准，">
+  <meta name="description" content="这是左偏树板">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P2742题解">
-<meta property="og:url" content="http://example.com/2024/07/17/P2742%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="P3377题解">
+<meta property="og:url" content="https://wryyyd.github.io/project/posts/2fbd7ecf/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="暴力&emsp;对于求凸包的题，暴力的方法，从最左下的点开始，旋转一条边，找所有的点中最早与这条边重合的，这样做时间复杂度为$\Theta(nm)$ Graham&emsp;考虑优化枚举顺序，使得每次不用重新判断每个点是否出现在这条线上，可以发现，一个凸包从左下角开始，逆时针依次枚举，路径上的点与左下角组成的直线角度逐渐增大，可以在选取了左下点后，以左下角与其他点组成的向量的角度大小作为排序基准，">
+<meta property="og:description" content="这是左偏树板">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/07/17/P2742%E9%A2%98%E8%A7%A3/image.png">
-<meta property="article:published_time" content="2024-07-17T05:11:23.000Z">
-<meta property="article:modified_time" content="2024-07-17T05:21:05.468Z">
+<meta property="article:published_time" content="2024-07-17T03:17:33.000Z">
+<meta property="article:modified_time" content="2024-07-17T06:04:48.795Z">
 <meta property="article:author" content="DCH">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="可并堆(左偏树)">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/07/17/P2742%E9%A2%98%E8%A7%A3/image.png">
 
-<link rel="canonical" href="http://example.com/2024/07/17/P2742%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="https://wryyyd.github.io/project/posts/2fbd7ecf/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>P2742题解 | Hexo</title>
+  <title>P3377题解 | Hexo</title>
   
 
 
@@ -96,7 +96,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/project/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">Hexo</h1>
       <span class="logo-line-after"><i></i></span>
@@ -105,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -116,29 +117,56 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -162,10 +190,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/17/P2742%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/2fbd7ecf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/project/images/avatar.gif">
       <meta itemprop="name" content="DCH">
       <meta itemprop="description" content="">
     </span>
@@ -175,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          P2742题解
+          P3377题解
         </h1>
 
         <div class="post-meta">
@@ -186,10 +214,20 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-17 13:11:23 / 修改时间：13:21:05" itemprop="dateCreated datePublished" datetime="2024-07-17T13:11:23+08:00">2024-07-17</time>
+              <time title="创建时间：2024-07-17 11:17:33 / 修改时间：14:04:48" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:33+08:00">2024-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/project/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">这是左偏树板</div>
 
         </div>
       </header>
@@ -200,26 +238,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h2><p>&emsp;对于求凸包的题，暴力的方法，从最左下的点开始，旋转一条边，找所有的点中最早与这条边重合的，这样做时间复杂度为$\Theta(nm)$</p>
-<h2 id="Graham"><a href="#Graham" class="headerlink" title="Graham"></a>Graham</h2><p>&emsp;考虑优化枚举顺序，使得每次不用重新判断每个点是否出现在这条线上，可以发现，一个凸包从左下角开始，逆时针依次枚举，路径上的点与左下角组成的直线角度逐渐增大，可以在选取了左下点后，以左下角与其他点组成的向量的角度大小作为排序基准，进行排序，以排序后的顺序作为枚举顺序。</p>
-<p>&emsp;使用一个栈存下路径上的点，对于新进入的点$C$，假设此时栈顶的元素为$A$，栈顶下一个点为$B$，点$C$此时一定进入栈中，但是点$A$是否出栈，即点$A$是否在$CB$的连线之内，若在，那么$A$显然不再路径上，$A$出栈。下图是一个$A$在$CB$内的示意图。</p>
-<p><img src="image.png" alt="image"></p>
-<p>对于上面的情况，判断是否在凸包内可以采用向量叉乘，通过向量叉乘的$z$维的正负判断。叉乘计算方式为</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-    \vec{a} \times \vec{b} &= \left| \begin{matrix}
-    \vec{i} & \vec{j} & \vec{k} \\
-    \hline
-    a_i & a_j & a_k\\
-    b_i & b_j & b_k
-\end{matrix}\right| \\
-    &= (a_j\cdot b_k-a_k\cdot b_j,-(a_i\cdot b_k-a_k\cdot b_i),a_i\cdot b_j-a_j\cdot b_i)
-\end{align*}</script><p>&emsp;当$z$轴均取0时，只保留值$a_i\cdot b_j-a_j\cdot b_i$，当$\vec{a}$沿逆时针方向转向$\vec{b}$时，$a_i\cdot b_j-a_j\cdot b_i &gt; 0$，可以由极坐标证明这个关系。</p>
-<p>&emsp;那么判断条件变成计算$\vec{CA}\times\vec{CB}$，若值大于0，则证明点$A$需要出栈，若值等于0，则证明$\vec{CA}$和$\vec{CB}$共线，选择长度最长的那条边，才保证符合凸包的条件。</p>
-<p>&emsp;需要注意这个过程需要一直进行，直到找到一个$\vec{CA}$和$\vec{CB}&lt;0$的点，再把点$C$插入栈中。</p>
-<p>&emsp;最后得到答案需要加上栈中最后一个点到起始点的距离。</p>
-<p>&emsp;排序效率为$\Theta(n\log n)$，扫描过程效率为$\Theta(n)$</p>
-<h2 id="Andrew"><a href="#Andrew" class="headerlink" title="Andrew"></a>Andrew</h2><p>&emsp;Andrew算法使用不同的排序方法，按照$x$轴坐标的大小排序，判断过程一致，需要注意，Andrew算法从左到右只能枚举凸包的一半，还需要从结束点枚举回开始点。注意第二次枚举的时候通过栈记录路径时，出栈不能把前一半凸包（在上述枚举条件下，为下凸包）的路径清理掉。</p>
+        <p> 这是一个基本的左偏树(可并堆)的模板，左偏树就是定义了距离<span
+class="math inline">\(dist\)</span>，要求左子树的<span
+class="math inline">\(dist\)</span>大于右子树的<span
+class="math inline">\(dist\)</span>， <span
+class="math inline">\(dist\)</span>定义为根到外点的距离，外点定义为一个子树的点，计算方式为边权之和，（可为层高差）</p>
+<p> 并查集中对于根节点的删除，在给根节点删除之后，把根节点的父亲数组指向他的子节点。</p>
 
     </div>
 
@@ -228,6 +252,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/project/tags/%E5%A0%86/" rel="tag"># 堆</a>
+              <a href="/project/tags/%E5%8F%AF%E5%B9%B6%E5%A0%86-%E5%B7%A6%E5%81%8F%E6%A0%91/" rel="tag"># 可并堆(左偏树)</a>
+          </div>
 
         
 
@@ -235,10 +263,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/07/17/P3377%E9%A2%98%E8%A7%A3/" rel="prev" title="P3377题解">
-      <i class="fa fa-chevron-left"></i> P3377题解
+    <a href="/project/posts/802d59a7/" rel="prev" title="P2607题解">
+      <i class="fa fa-chevron-left"></i> P2607题解
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/project/posts/41246cb9/" rel="next" title="P2742题解">
+      P2742题解 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -297,7 +328,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B"><span class="nav-number">1.</span> <span class="nav-text">暴力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graham"><span class="nav-number">2.</span> <span class="nav-text">Graham</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Andrew"><span class="nav-number">3.</span> <span class="nav-text">Andrew</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -309,11 +339,23 @@
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+          <a href="/project/archives/">
         
           <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/project/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/project/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -362,19 +404,19 @@
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/project/lib/anime.min.js"></script>
+  <script src="/project/lib/velocity/velocity.min.js"></script>
+  <script src="/project/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="/project/js/utils.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
+<script src="/project/js/motion.js"></script>
 
 
-<script src="/js/next-boot.js"></script>
+<script src="/project/js/schemes/muse.js"></script>
+
+
+<script src="/project/js/next-boot.js"></script>
 
 
 
@@ -382,6 +424,10 @@
   
 
 
+
+
+  
+<script src="/project/js/local-search.js"></script>
 
 
 

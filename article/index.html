@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/project/css/main.css">
+
+
+<link rel="stylesheet" href="/project/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wryyyd.github.io","root":"/project/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://wryyyd.github.io/project/article/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="DCH">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wryyyd.github.io/project/article/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/project/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+	<div class="tag-cloud">
+	  <div class="tag-cloud-tags" id="tags">
+		<a href="/project/tags/NIM%E5%9D%87%E8%A1%A1/" style="font-size: 16px; color: #fff">NIM均衡</a> <a href="/project/tags/%E5%87%B8%E5%8C%85/" style="font-size: 16px; color: #fff">凸包</a> <a href="/project/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16px; color: #fff">动态规划</a> <a href="/project/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" style="font-size: 16px; color: #fff">博弈论</a> <a href="/project/tags/%E5%8F%AF%E5%B9%B6%E5%A0%86-%E5%B7%A6%E5%81%8F%E6%A0%91/" style="font-size: 16px; color: #fff">可并堆(左偏树)</a> <a href="/project/tags/%E5%A0%86/" style="font-size: 16px; color: #fff">堆</a> <a href="/project/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 16px; color: #fff">数论</a> <a href="/project/tags/%E6%A0%91%E5%BD%A2DP/" style="font-size: 16px; color: #fff">树形DP</a> <a href="/project/tags/%E7%8E%AF/" style="font-size: 16px; color: #fff">环</a>
+	  </div>
+	</div>
+	<br>
+	
+	<script type="text/javascript">
+     var alltags = document.getElementsByClassName('tag-cloud-tags');
+     var tags = alltags[0].getElementsByTagName('a');
+     for (var i = tags.length - 1; i >= 0; i--) {
+       var r=Math.floor(Math.random()*75+130);
+       var g=Math.floor(Math.random()*75+100);
+       var b=Math.floor(Math.random()*75+80);
+       tags[i].style.background = "rgb("+r+","+g+","+b+")";
+     }
+</script>
+
+<style>
+  .tag-cloud-tags{
+    /*font-family: Helvetica, Tahoma, Arial;*/
+    /*font-weight: 100;*/
+    text-align: center;
+    counter-reset: tags;
+  }
+  .tag-cloud-tags a{
+    border-radius: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 8px 5px 0px 0px;
+  }
+  .tag-cloud-tags a:before{
+    content: "?";
+  }
+
+  .tag-cloud-tags a:hover{
+     box-shadow: 0px 5px 15px 0px rgba(0,0,0,.4);
+     transform: scale(1.1);
+     /*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/
+     transition-duration: 0.15s;
+  }
+</style>
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/41246cb9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/41246cb9/" class="post-title-link" itemprop="url">P2742题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 13:11:23 / 修改时间：14:04:23" itemprop="dateCreated datePublished" datetime="2024-07-17T13:11:23+08:00">2024-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/project/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这是凸包的板</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/41246cb9/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/2fbd7ecf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/2fbd7ecf/" class="post-title-link" itemprop="url">P3377题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:17:33 / 修改时间：14:04:48" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:33+08:00">2024-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/project/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这是左偏树板</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/2fbd7ecf/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/802d59a7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/802d59a7/" class="post-title-link" itemprop="url">P2607题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:17:22 / 修改时间：14:07:42" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:22+08:00">2024-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/project/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这道题是树上DP</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/802d59a7/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/a4c91c52/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/a4c91c52/" class="post-title-link" itemprop="url">P2254题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:17:15 / 修改时间：14:01:39" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:15+08:00">2024-07-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 题面中的魔法的含义是1900在该时间段的最大滑动距离是时间段的长度，并不关心具体在哪个位置时使用了魔法使得1900暂停（题目没问，且对于一条可行的路径，其使用魔法的可行选项并不唯一）。</p>
+<p> 故可以不按照时间进行枚举，而是对于时间段进行枚举，（减少必须枚举的数量），将一个时间段内依次枚举改为找到一个时间段内可能对于当前点产生贡献的点并找到其中的最大值</p>
+<p> 那么对于第<span class="math inline">\(i\)</span>个时间段<span class="math inline">\([s_i,t_i]\)</span>，对于当前点<span class="math inline">\((x,y)\)</span>处，其到达这个位置可能的最大路径长度由逆着滑动方向，滑动距离不超过时间段长度，且滑动过程中没有障碍物的情况下能够到达的点的集合中，之前的路径长度加上第<span class="math inline">\(i\)</span>个时间段内需要移动的滑动距离最大的点提供。</p>
+<p> 不妨设状态为<span class="math inline">\(f[k][x][y]\)</span>，表示当前在第<span class="math inline">\(k\)</span>个时间段到达点<span class="math inline">\((x,y)\)</span>时能够获得的最大路径，那么可以根据上面的分析将状态转移方程写为
+<span class="math display">\[
+f[k][x][y] =
+max(f[k][x][y],f[k-1][x+t*d[x]][y+t*d[y]]+t*(abs(d[x])+abs(d[y])))
+\]</span> 转移条件为 <span class="math display">\[
+s_i\leq t\leq t_i \quad 且 \quad (x+t*d[x],y+t*d[y])到(x,y)之间无障碍物
+\]</span> 此时的时间复杂度可以知道为<span class="math inline">\(\Theta(KNMN)\)</span>，其中<span class="math inline">\(K\)</span>来自枚举时间段，<span class="math inline">\(NM\)</span>来自枚举图中每一个点，<span class="math inline">\(N\)</span>来自对于每一个点去找到他的最大值，当<span class="math inline">\(K,N,M\)</span>取200时，时间复杂度来到<span class="math inline">\(1.6\times10^9\)</span>，如果计算上常数，其复杂度难以接受。</p>
+<p> 对于一个时间段内进行更新的话，可以发现其中对于每个点来说，其需要向前找的距离一致，那么就是一个滑动窗口，可以采用单调队列进行优化。此时找的是最大值，那么维护的是一个单调递减队列。单调队列保证其内容递减，当一个新的值入队，那么从后向前删除队中比他小的值，这些值在之后的更新中将不会有机会产生贡献，并将这个值插入队尾。接着从头开始枚举，删除不在窗口中的值。</p>
+<p> 对于这道题来说，每次移动的方向是确定的，假设向下移动，那么对于每一个列来说其是相互独立的，不会相互影响，可以从上到下依次更新。对于每一列，采用一个单调队列，设当前为时间段<span class="math inline">\(k\)</span>，那么将<span class="math inline">\(k-1\)</span>时间段中在位置<span class="math inline">\((x,y)\)</span>的<span class="math inline">\(f\)</span>值取出，放入单调队列并维护这个单调队列合法，注意此时单调队列的大小判断方式为对应位置的上一时刻<span class="math inline">\(f\)</span>值加上在这一时刻移动的距离，之后用单调队列的队首即最大贡献更新。如果遇到了障碍，说明障碍前的点不会更新障碍后的点，那么可以将队列清空，那么此时通过势能分析法，每个点都只会被枚举一次，那么消去了循环最内层带来枚举最大值的时间复杂度，整体时间复杂度变为<span class="math inline">\(\Theta(KNM)\)</span>，空间复杂度同样为<span class="math inline">\(\Theta(KNM)\)</span>，由于更新方程只与上一个时刻有关，可以将第一维优化为只有0，1两个值，或者直接消去第一维。</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/a4c91c52/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/acac3a0a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/acac3a0a/" class="post-title-link" itemprop="url">P2157题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:17:09 / 修改时间：14:01:39" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:09+08:00">2024-07-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>​ 当前是否选择第<span class="math inline">\(i\)</span>个人取吃饭受到他之前的人和他之后的人影响，不符合无后效性的定义，而他之后的人根据题目要求最多只有8个，可以考虑使用状态压缩，把第<span class="math inline">\(i\)</span>个人和其后面7个人是否吃饭作为状态进行压缩，故DP的一个维度为状态，大小为256。</p>
+<p>​ 不妨取第一维<span class="math inline">\(i\)</span>表示前<span class="math inline">\(i\)</span>-1个人都吃完成，第二维<span class="math inline">\(j\)</span>表示第<span class="math inline">\(i\)</span>个人和他后面7个人是否吃饭的状态，采用小端表示，即表示第<span class="math inline">\(i\)</span>个人的二进制位为最低位（主要是方便）。</p>
+<p>​ 因为更新权值需要知道上一个吃饭的是谁，故需要第三维表示上一个吃饭的是谁，为了保证全局最优解，故需要记录状态，而非仅记录当前产生贡献（最大值）中选取的上一个吃饭的是谁，虽然第1维表示前面<span class="math inline">\(i\)</span>-1个人吃了饭，但是前面的人吃饭顺序不确定，所以这一维度需要表示的范围从第<span class="math inline">\(i\)</span>个人的前到第<span class="math inline">\(i\)</span>个人的后。而最大的容忍插队是8个，故如果当前要选择第<span class="math inline">\(i\)</span>个人吃饭，那么必然上一个吃饭的人的范围在第<span class="math inline">\(i\)</span>个人前8个之间，否则不符合仅允许后<span class="math inline">\(B_i\)</span>个人吃饭的要求。故第三维的范围为<span class="math inline">\([-8,7]\)</span>，为了使得数组下标不为负，那么可以修改范围为<span class="math inline">\([0,15]\)</span></p>
+<p>​ 故可以把DP方程写为 <span class="math display">\[
+f[i][j][k]
+\]</span>
+​ 那么对于DP方程的转移，首先如何转移第一维的值。根据第一维的规则，<span class="math inline">\(i\)</span>表示前<span class="math inline">\(i\)</span>-1个人吃完饭，可知如果第<span class="math inline">\(i\)</span>个人吃完饭了，就可以进行转移，即<span class="math inline">\(j\)</span>的最低位为1时，就可以转移了，所以转移的规则为
+<span class="math display">\[
+f[i+1][j&gt;&gt;1][k-1] = min(f[i+1][j&gt;&gt;1][k-1],f[i][j][k])\quad
+(j\&amp;1==1)
+\]</span> ​ 在这种情况下，<span class="math inline">\(f[i+1][j&gt;&gt;1][k-1]\)</span>与<span class="math inline">\(f[i][j][k]\)</span>等价，故优先转移第一维，使用<span class="math inline">\(f[i+1][j&gt;&gt;1][k-1]\)</span>对于后续的情况进行更新，减少了第一维转移的个数。</p>
+<p>​ 对于<span class="math inline">\(j\)</span>最后一位不为1的情况，可以枚举当前吃饭的是谁，即选择<span class="math inline">\(j\)</span>中二进制位为0的位置，让这个位置的人吃饭，那么更新规则为
+<span class="math display">\[
+f[i][j|(1&lt;&lt;z)][k] =
+min(f[i][j|(1&lt;&lt;z)][k],f[i][j][k]+T[i+z]\oplus T[i+k])\quad
+(j\&amp;1!=1)
+\]</span> ​ 那么<span class="math inline">\(i+z\)</span>上的人能否吃饭受到第<span class="math inline">\(i\)</span>个人容许的限度和<span class="math inline">\([i+1,i+z-1]\)</span>之间没有吃饭的人的容许限度的限制。即<span class="math inline">\(z\)</span>的选择大小需要考虑他到<span class="math inline">\(i\)</span>之间没有吃饭的人的容许情况。（这一点不考虑完整只考虑i的容许的话只有32%的正确）。</p>
+<p>​ 在更新时，还需要考虑是否是第一个人，第一个人不计算时间。</p>
+<p>​ 根据上式转移方程，那么初始值可以选择为 <span class="math display">\[
+f[1][0][7]=0
+\]</span>
+表示当前进行到第一个人，当前状态是0，上一个吃饭的人设置为第0个人，表示不存在。</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/acac3a0a/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/ec5e0bcb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/ec5e0bcb/" class="post-title-link" itemprop="url">P1972题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:17:03 / 修改时间：14:01:39" itemprop="dateCreated datePublished" datetime="2024-07-17T11:17:03+08:00">2024-07-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 这道题需要明确的是，查询的是种类个数，故多个相同种类的点带来的贡献只有一个有效。假设只有最右端有效，那么从左到右依次更改，出现一个新的种类时，删去原来位置上的贡献，更新当前位置上的贡献。更改到第
+i个的时候，那么对于这个区间，可以采用前缀和的方式求得所有的右区间为i的查询的结果，因为假设一个类别出现在L左侧和右侧，那么根据更新规则，一定是在L右侧的点产生贡献，保证不漏，不出现在L右侧的点，不会在<span class="math inline">\([L,R]\)</span>之间产生贡献。采用区间查询的方式，一次性告诉所有查询，可以采用离线查询后返回的方式得到答案。故采用每个区间最右侧作为排序基准。每次修改的只是一个点，只用枚举完整个序列，为<span class="math inline">\(\Theta(n)\)</span>.
+ 整个过程区间查询，单点修改，为了保证其效率的优秀，采用的是树状数组对整个数组进行操作</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/ec5e0bcb/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/84e5ff3c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/84e5ff3c/" class="post-title-link" itemprop="url">P1542题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:16:54 / 修改时间：14:01:39" itemprop="dateCreated datePublished" datetime="2024-07-17T11:16:54+08:00">2024-07-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/84e5ff3c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/project/posts/b2bcbd52/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/project/posts/b2bcbd52/" class="post-title-link" itemprop="url">P1247题解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-17 11:00:10 / 修改时间：14:15:30" itemprop="dateCreated datePublished" datetime="2024-07-17T11:00:10+08:00">2024-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/project/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>&emsp;对于取火柴的题目，就是取石子即Nim均衡，如果每个堆的大小异或起来为0，那么此时必输，那么找必胜策略的方法为对于其中一个堆，取出石子使得剩下的石子的个数等于其余堆的异或和。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/project/posts/b2bcbd52/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DCH</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/project/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/project/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/project/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DCH</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/project/lib/anime.min.js"></script>
+  <script src="/project/lib/velocity/velocity.min.js"></script>
+  <script src="/project/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/project/js/utils.js"></script>
+
+<script src="/project/js/motion.js"></script>
+
+
+<script src="/project/js/schemes/muse.js"></script>
+
+
+<script src="/project/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/project/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
