@@ -28,7 +28,7 @@
 <meta property="og:description" content="这是一道在考虑异或运算下的数各二进制位的独立性的情况下，将原题转换为统计个数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-18T08:23:06.000Z">
-<meta property="article:modified_time" content="2024-07-18T08:29:47.065Z">
+<meta property="article:modified_time" content="2024-07-18T08:42:30.142Z">
 <meta property="article:author" content="DCH">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-18 16:23:06 / 修改时间：16:29:47" itemprop="dateCreated datePublished" datetime="2024-07-18T16:23:06+08:00">2024-07-18</time>
+              <time title="创建时间：2024-07-18 16:23:06 / 修改时间：16:42:30" itemprop="dateCreated datePublished" datetime="2024-07-18T16:23:06+08:00">2024-07-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -442,6 +442,59 @@ class="math inline">\(num_1*num_0\)</span>，最终统计答案的时候，使�
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
