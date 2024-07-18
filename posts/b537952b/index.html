@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wryyyd.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这是凸包题，可以通过数学公式将其转换成普通的凸包题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P3829题解">
+<meta property="og:url" content="https://wryyyd.github.io/posts/b537952b/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这是凸包题，可以通过数学公式将其转换成普通的凸包题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wryyyd.github.io/posts/b537952b/image.png">
+<meta property="og:image" content="https://wryyyd.github.io/posts/b537952b/image2.jpg">
+<meta property="article:published_time" content="2024-07-18T08:20:09.000Z">
+<meta property="article:modified_time" content="2024-07-18T08:22:33.932Z">
+<meta property="article:author" content="DCH">
+<meta property="article:tag" content="凸包">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wryyyd.github.io/posts/b537952b/image.png">
+
+<link rel="canonical" href="https://wryyyd.github.io/posts/b537952b/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>P3829题解 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wryyyd.github.io/posts/b537952b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DCH">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P3829题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-18 16:20:09 / 修改时间：16:22:33" itemprop="dateCreated datePublished" datetime="2024-07-18T16:20:09+08:00">2024-07-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B4%9B%E8%B0%B7%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">洛谷题解</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">这是凸包题，可以通过数学公式将其转换成普通的凸包题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> 首先可以发现，如果半径为0，那么就是几个长方形之间求一个凸包，那么就是凸包的板，那么在半径不为0的情况下，首先根据样例，可以分析到对应的路径，如下图中绿色的线所示</p>
+<figure>
+<img src="image.png" alt="路径图" />
+<figcaption aria-hidden="true">路径图</figcaption>
+</figure>
+<p>为了保证凸包，可以发现绿色的线与圆相切，此时考察一张信用卡中的4个圆心，观察所有的圆心组成的凸包，因为圆无法直接进行凸包运算，需要进行转化，猜测与圆心有关。那么如下图所示，可以得到圆心组成的凸包</p>
+<figure>
+<img src="image2.jpg" alt="圆心路径" />
+<figcaption aria-hidden="true">圆心路径</figcaption>
+</figure>
+<p> 由分析可知，原凸包路径=圆心凸包路径+圆弧段长度，圆弧段的长度可以由下式算出</p>
+<p><span class="math display">\[
+    l_c = \theta*r = r*\sum_{i=1}^n \theta_i
+\]</span></p>
+<p>其中<span class="math inline">\(n\)</span>是圆弧对应的角<span
+class="math inline">\(\theta_i\)</span>的个数，也是凸包内角<span
+class="math inline">\(\alpha_i\)</span>个数，由几何关系可以知道，<span
+class="math inline">\(\theta_i\)</span>和<span
+class="math inline">\(\alpha_i\)</span>之间有如下的对应关系</p>
+<p><span class="math display">\[
+    \theta_i = \pi - \alpha_i
+\]</span></p>
+<p>那么带入圆弧长度的公式就有</p>
+<p><span class="math display">\[
+    l_c = r*\sum_{i=1}^n \theta_i = r*\sum_{i=1}^n (\pi-\alpha_i) = r *
+(n\pi-\sum_{i=1}^n\alpha_i)\\
+    = r*(n\pi-(n-2)\pi ) = 2\pi r
+\]</span></p>
+<p>故圆弧部分的长度固定，那么这道题就转换为求圆心组成的凸包的长度加上一个圆的周长</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="type">int</span> N;</span><br><span class="line"><span class="type">double</span> a, b, r, X[MAXN &lt;&lt; <span class="number">2</span>], Y[MAXN &lt;&lt; <span class="number">2</span>];</span><br><span class="line"><span class="type">double</span> adx[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">-0.5</span>, <span class="number">-0.5</span>&#125;, ady[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">-0.5</span>, <span class="number">-0.5</span>, <span class="number">0.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Graham</span> &#123;</span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> n, pos, ans_stack[MAXN], ans_top;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">        <span class="type">double</span> x, y;</span><br><span class="line">        node <span class="keyword">operator</span>-(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;x - a.x, y - a.y&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 重载为叉乘运算</span></span><br><span class="line">        <span class="type">double</span> <span class="keyword">operator</span>*(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> x * a.y - y * a.x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 重载为点积运算</span></span><br><span class="line">        <span class="type">double</span> <span class="keyword">operator</span>^(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> x * a.x + y * a.y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; node_list[MAXN], stap;</span><br><span class="line">    <span class="type">double</span> ans, eps = <span class="number">1e-7</span>;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">double</span> <span class="title">dist</span><span class="params">(node i, node j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sqrt</span>((i - j) ^ (i - j));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    计算两个向量的叉乘</span></span><br><span class="line"><span class="comment">    如果结果小于0，说明向量a在向量b的逆时针方向，返回0</span></span><br><span class="line"><span class="comment">    如果结果大于0，说明向量a在向量b的顺时针方向，返回1</span></span><br><span class="line"><span class="comment">    对于等于0的情况，说明向量a和向量b共线,还需要判断两个向量的距离，若b距离原点更近，则返回1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">        <span class="type">double</span> tmp = a * b;</span><br><span class="line">        <span class="keyword">if</span> (tmp &lt; -eps) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">abs</span>(tmp) &lt; eps) &#123;</span><br><span class="line">            <span class="type">double</span> dis1 = <span class="built_in">dist</span>(a, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;), dis2 = <span class="built_in">dist</span>(b, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">            <span class="keyword">if</span> (dis2 - dis1 &gt; eps) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断向量(新来的点-&gt;栈顶组成元素)是否在向量(新来的点-&gt;栈顶下一个元素)的顺时针方向</span></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">checkvalida</span><span class="params">(node a, node b, node c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">cmp</span>(c - a, c - b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Graham</span>() &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        ans_top = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Graham</span>(<span class="type">int</span> n, <span class="type">double</span> *x, <span class="type">double</span> *y) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        ans_top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            node_list[i].x = x[i];</span><br><span class="line">            node_list[i].y = y[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 选择初始点，当枚举边采用逆时针旋转的方法时，选择最下方的点，当y值相同的时候，选择最左边的点</span></span><br><span class="line">        stap.y = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node_list[i].y &lt; stap.y || (node_list[i].y == stap.y &amp;&amp; node_list[i].x &lt; stap.x)) &#123;</span><br><span class="line">                pos = i;</span><br><span class="line">                stap = node_list[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        std::<span class="built_in">swap</span>(node_list[<span class="number">1</span>], node_list[pos]);</span><br><span class="line"></span><br><span class="line">        std::<span class="built_in">sort</span>(node_list + <span class="number">2</span>, node_list + n + <span class="number">1</span>,</span><br><span class="line">                  <span class="comment">// 按照与初始点的极角排序</span></span><br><span class="line">                  [&amp;](node a, node b) &#123;</span><br><span class="line">                      <span class="keyword">return</span> <span class="built_in">cmp</span>(a - stap, b - stap);</span><br><span class="line">                  &#125;);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="comment">// 判断向量(新来的点-&gt;栈顶组成元素)是否在向量(新来的点-&gt;栈顶下一个元素)的顺时针方向即叉乘大于0，如果在，那么栈顶元素出栈，一定不会是最优解。</span></span><br><span class="line">            <span class="keyword">while</span> (ans_top &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">checkvalida</span>(node_list[ans_stack[ans_top]], node_list[ans_stack[ans_top - <span class="number">1</span>]], node_list[i])) ans_top--;</span><br><span class="line">            ans_stack[++ans_top] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= ans_top; i++) &#123;</span><br><span class="line">            ans += <span class="built_in">dist</span>(node_list[ans_stack[i]], node_list[ans_stack[i - <span class="number">1</span>]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans + <span class="built_in">dist</span>(node_list[ans_stack[<span class="number">1</span>]], node_list[ans_stack[ans_top]]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">rotate</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y, <span class="type">double</span> theta, <span class="type">int</span> pos, <span class="type">double</span> cx, <span class="type">double</span> cy)</span> </span>&#123;</span><br><span class="line">    X[pos] = cx + x * <span class="built_in">cos</span>(theta) - y * <span class="built_in">sin</span>(theta);</span><br><span class="line">    Y[pos] = cy + x * <span class="built_in">sin</span>(theta) + y * <span class="built_in">cos</span>(theta);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf&quot;</span>, &amp;a, &amp;b, &amp;r);</span><br><span class="line">    std::<span class="built_in">swap</span>(a, b);</span><br><span class="line">    <span class="type">double</span> cx, cy, theta;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf&quot;</span>, &amp;cx, &amp;cy, &amp;theta);</span><br><span class="line">        <span class="comment">// 计算旋转后的圆心</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">4</span>; k++)</span><br><span class="line">            <span class="built_in">rotate</span>((a - <span class="number">2</span> * r) * adx[k], (b - <span class="number">2</span> * r) * ady[k], theta, (i - <span class="number">1</span>) * <span class="number">4</span> + k, cx, cy);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Graham <span class="title">graham</span><span class="params">(N * <span class="number">4</span>, X, Y)</span></span>;</span><br><span class="line">    <span class="type">double</span> ans = graham.<span class="built_in">solve</span>() + <span class="number">2</span> * <span class="number">3.14159265358979323846</span> * r;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%87%B8%E5%8C%85/" rel="tag"># 凸包</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/30b2f822/" rel="prev" title="P3805题解">
+      <i class="fa fa-chevron-left"></i> P3805题解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/7cfcfdd6/" rel="next" title="P3917题解">
+      P3917题解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DCH</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DCH</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

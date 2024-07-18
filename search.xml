@@ -253,4 +253,211 @@ class="math inline">\(dist\)</span>定义为根到外点的距离，外点定义
         <tag>并查集</tag>
       </tags>
   </entry>
+  <entry>
+    <title>P3805题解</title>
+    <url>/posts/30b2f822/</url>
+    <content><![CDATA[<p> 对于求回文串的要求，可以确定是从中间向两边扩散的算法，回文串可以分为偶回文串和奇回文串，为了方便，可以用不存在字符扩展整个回文串，使得偶回文串变成奇回文串，使得一个回文串一定存在一个回文中心。</p>
+<p> Manacher的核心在于减少在计算回文串时每个字符被枚举的次数，假设分别以前<span
+class="math inline">\(i-1\)</span>个字符作为回文中心，其最长回文长度已经求出，且回文串枚举最长枚举到最右侧<span
+class="math inline">\(j\)</span>的位置，对应的回文中心为<span
+class="math inline">\(center\)</span>，不妨设<span
+class="math inline">\(j&gt;i\)</span>，那么此时，以<span
+class="math inline">\(i\)</span>为中心的回文串长度<span
+class="math inline">\(l_i\)</span>有一个下限</p>
+<p><span class="math display">\[
+    l_i = \min(l_{2*center-i},j-i)
+\]</span></p>
+<p>那么开始枚举就是从<span
+class="math inline">\(i+l_i\)</span>之后的点开始判断是否构成以<span
+class="math inline">\(i\)</span>为中心的回文串</p>
+<p> 下面说明整体的复杂度为<span
+class="math inline">\(\Theta(n)\)</span>，</p>
+<p> 对于<span
+class="math inline">\(i+l_i&lt;j\)</span>的情况，由于回文串的对称性，左右完全对称，那么以<span
+class="math inline">\(i\)</span>为中心的回文串不可能再增加，因为如果增加的话，那么其对称点<span
+class="math inline">\(2*center-i\)</span>的回文长度会增加，与事实不符。</p>
+<p> 对于<span class="math inline">\(i+l_i=j\)</span>的情况，由于<span
+class="math inline">\(j\)</span>右侧的情况未知，需要进行扩散判断是否能够构成回文串。</p>
+<p> 可以看到每个点只会被枚举一次，故整体的复杂度为<span
+class="math inline">\(\Theta(n)\)</span></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">manacher</span> &#123;</span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 扩展字符串，使得不用区分奇偶回文串</span></span><br><span class="line">    <span class="function">string <span class="title">expandString</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        string result = <span class="string">&quot;#&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            result += s[i];</span><br><span class="line">            result += <span class="string">&quot;#&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    找到最长回文子串</span></span><br><span class="line"><span class="comment">    对于一个字符，如果它落在另一个回文串的内部，那么它的对称点也一定在这个回文串的内部，它的回文半径也一定等于它的对称点的回文半径且不会超过这个回文串的边界。</span></span><br><span class="line"><span class="comment">    通过这样的方法进行跳转，再判断之后的点是否符合回文串，可以在O(n)的时间复杂度内找到最长回文子串。因为每个点只枚举一次。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        string str = <span class="built_in">expandString</span>(s);</span><br><span class="line">        <span class="type">int</span> n = str.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">length</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="type">int</span> maxRight = <span class="number">0</span>, center = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> ansCenter = <span class="number">0</span>, ansLength = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; maxRight) &#123;</span><br><span class="line">                length[i] = <span class="built_in">min</span>(length[<span class="number">2</span> * center - i], maxRight - i);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                length[i] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (i - length[i] &gt;= <span class="number">0</span> &amp;&amp; i + length[i] &lt; n &amp;&amp; str[i - length[i]] == str[i + length[i]]) &#123;</span><br><span class="line">                length[i]++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i + length[i] - <span class="number">1</span> &gt; maxRight) &#123;</span><br><span class="line">                maxRight = i + length[i] - <span class="number">1</span>;</span><br><span class="line">                center = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (length[i] &gt; ansLength) &#123;</span><br><span class="line">                ansLength = length[i];</span><br><span class="line">                ansCenter = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 用于输出具体的字符串</span></span><br><span class="line">        <span class="comment">// string ans;</span></span><br><span class="line">        <span class="comment">// for(int i=ansCenter-(ansLength-1);i&lt;ansCenter+ansLength;i++)&#123;</span></span><br><span class="line">        <span class="comment">//     if(str[i] == &#x27;#&#x27;)&#123;</span></span><br><span class="line">        <span class="comment">//         continue;</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">//     ans += str[i];</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">return</span> ansLength - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>manacher</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P3829题解</title>
+    <url>/posts/b537952b/</url>
+    <content><![CDATA[<p> 首先可以发现，如果半径为0，那么就是几个长方形之间求一个凸包，那么就是凸包的板，那么在半径不为0的情况下，首先根据样例，可以分析到对应的路径，如下图中绿色的线所示</p>
+<figure>
+<img src="image.png" alt="路径图" />
+<figcaption aria-hidden="true">路径图</figcaption>
+</figure>
+<p>为了保证凸包，可以发现绿色的线与圆相切，此时考察一张信用卡中的4个圆心，观察所有的圆心组成的凸包，因为圆无法直接进行凸包运算，需要进行转化，猜测与圆心有关。那么如下图所示，可以得到圆心组成的凸包</p>
+<figure>
+<img src="image2.jpg" alt="圆心路径" />
+<figcaption aria-hidden="true">圆心路径</figcaption>
+</figure>
+<p> 由分析可知，原凸包路径=圆心凸包路径+圆弧段长度，圆弧段的长度可以由下式算出</p>
+<p><span class="math display">\[
+    l_c = \theta*r = r*\sum_{i=1}^n \theta_i
+\]</span></p>
+<p>其中<span class="math inline">\(n\)</span>是圆弧对应的角<span
+class="math inline">\(\theta_i\)</span>的个数，也是凸包内角<span
+class="math inline">\(\alpha_i\)</span>个数，由几何关系可以知道，<span
+class="math inline">\(\theta_i\)</span>和<span
+class="math inline">\(\alpha_i\)</span>之间有如下的对应关系</p>
+<p><span class="math display">\[
+    \theta_i = \pi - \alpha_i
+\]</span></p>
+<p>那么带入圆弧长度的公式就有</p>
+<p><span class="math display">\[
+    l_c = r*\sum_{i=1}^n \theta_i = r*\sum_{i=1}^n (\pi-\alpha_i) = r *
+(n\pi-\sum_{i=1}^n\alpha_i)\\
+    = r*(n\pi-(n-2)\pi ) = 2\pi r
+\]</span></p>
+<p>故圆弧部分的长度固定，那么这道题就转换为求圆心组成的凸包的长度加上一个圆的周长</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="type">int</span> N;</span><br><span class="line"><span class="type">double</span> a, b, r, X[MAXN &lt;&lt; <span class="number">2</span>], Y[MAXN &lt;&lt; <span class="number">2</span>];</span><br><span class="line"><span class="type">double</span> adx[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">-0.5</span>, <span class="number">-0.5</span>&#125;, ady[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">-0.5</span>, <span class="number">-0.5</span>, <span class="number">0.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Graham</span> &#123;</span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> n, pos, ans_stack[MAXN], ans_top;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">        <span class="type">double</span> x, y;</span><br><span class="line">        node <span class="keyword">operator</span>-(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;x - a.x, y - a.y&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 重载为叉乘运算</span></span><br><span class="line">        <span class="type">double</span> <span class="keyword">operator</span>*(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> x * a.y - y * a.x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 重载为点积运算</span></span><br><span class="line">        <span class="type">double</span> <span class="keyword">operator</span>^(node a) &#123;</span><br><span class="line">            <span class="keyword">return</span> x * a.x + y * a.y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; node_list[MAXN], stap;</span><br><span class="line">    <span class="type">double</span> ans, eps = <span class="number">1e-7</span>;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">double</span> <span class="title">dist</span><span class="params">(node i, node j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sqrt</span>((i - j) ^ (i - j));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    计算两个向量的叉乘</span></span><br><span class="line"><span class="comment">    如果结果小于0，说明向量a在向量b的逆时针方向，返回0</span></span><br><span class="line"><span class="comment">    如果结果大于0，说明向量a在向量b的顺时针方向，返回1</span></span><br><span class="line"><span class="comment">    对于等于0的情况，说明向量a和向量b共线,还需要判断两个向量的距离，若b距离原点更近，则返回1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">        <span class="type">double</span> tmp = a * b;</span><br><span class="line">        <span class="keyword">if</span> (tmp &lt; -eps) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">abs</span>(tmp) &lt; eps) &#123;</span><br><span class="line">            <span class="type">double</span> dis1 = <span class="built_in">dist</span>(a, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;), dis2 = <span class="built_in">dist</span>(b, &#123;<span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">            <span class="keyword">if</span> (dis2 - dis1 &gt; eps) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断向量(新来的点-&gt;栈顶组成元素)是否在向量(新来的点-&gt;栈顶下一个元素)的顺时针方向</span></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">checkvalida</span><span class="params">(node a, node b, node c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">cmp</span>(c - a, c - b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Graham</span>() &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        ans_top = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Graham</span>(<span class="type">int</span> n, <span class="type">double</span> *x, <span class="type">double</span> *y) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        ans_top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            node_list[i].x = x[i];</span><br><span class="line">            node_list[i].y = y[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 选择初始点，当枚举边采用逆时针旋转的方法时，选择最下方的点，当y值相同的时候，选择最左边的点</span></span><br><span class="line">        stap.y = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node_list[i].y &lt; stap.y || (node_list[i].y == stap.y &amp;&amp; node_list[i].x &lt; stap.x)) &#123;</span><br><span class="line">                pos = i;</span><br><span class="line">                stap = node_list[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        std::<span class="built_in">swap</span>(node_list[<span class="number">1</span>], node_list[pos]);</span><br><span class="line"></span><br><span class="line">        std::<span class="built_in">sort</span>(node_list + <span class="number">2</span>, node_list + n + <span class="number">1</span>,</span><br><span class="line">                  <span class="comment">// 按照与初始点的极角排序</span></span><br><span class="line">                  [&amp;](node a, node b) &#123;</span><br><span class="line">                      <span class="keyword">return</span> <span class="built_in">cmp</span>(a - stap, b - stap);</span><br><span class="line">                  &#125;);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="comment">// 判断向量(新来的点-&gt;栈顶组成元素)是否在向量(新来的点-&gt;栈顶下一个元素)的顺时针方向即叉乘大于0，如果在，那么栈顶元素出栈，一定不会是最优解。</span></span><br><span class="line">            <span class="keyword">while</span> (ans_top &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">checkvalida</span>(node_list[ans_stack[ans_top]], node_list[ans_stack[ans_top - <span class="number">1</span>]], node_list[i])) ans_top--;</span><br><span class="line">            ans_stack[++ans_top] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= ans_top; i++) &#123;</span><br><span class="line">            ans += <span class="built_in">dist</span>(node_list[ans_stack[i]], node_list[ans_stack[i - <span class="number">1</span>]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans + <span class="built_in">dist</span>(node_list[ans_stack[<span class="number">1</span>]], node_list[ans_stack[ans_top]]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">rotate</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y, <span class="type">double</span> theta, <span class="type">int</span> pos, <span class="type">double</span> cx, <span class="type">double</span> cy)</span> </span>&#123;</span><br><span class="line">    X[pos] = cx + x * <span class="built_in">cos</span>(theta) - y * <span class="built_in">sin</span>(theta);</span><br><span class="line">    Y[pos] = cy + x * <span class="built_in">sin</span>(theta) + y * <span class="built_in">cos</span>(theta);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf&quot;</span>, &amp;a, &amp;b, &amp;r);</span><br><span class="line">    std::<span class="built_in">swap</span>(a, b);</span><br><span class="line">    <span class="type">double</span> cx, cy, theta;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf&quot;</span>, &amp;cx, &amp;cy, &amp;theta);</span><br><span class="line">        <span class="comment">// 计算旋转后的圆心</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">4</span>; k++)</span><br><span class="line">            <span class="built_in">rotate</span>((a - <span class="number">2</span> * r) * adx[k], (b - <span class="number">2</span> * r) * ady[k], theta, (i - <span class="number">1</span>) * <span class="number">4</span> + k, cx, cy);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Graham <span class="title">graham</span><span class="params">(N * <span class="number">4</span>, X, Y)</span></span>;</span><br><span class="line">    <span class="type">double</span> ans = graham.<span class="built_in">solve</span>() + <span class="number">2</span> * <span class="number">3.14159265358979323846</span> * r;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>凸包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P3917题解</title>
+    <url>/posts/7cfcfdd6/</url>
+    <content><![CDATA[<p>​ 这道题使用的是异或进行操作，异或运算也可以进行前缀和操作，而异或和的位之间具有独立性，两个二进制位之间的异或运算相互互不影响。</p>
+<p>​ 这道题求<span
+class="math inline">\(N\)</span>长序列的所有异或子序列之和，哪怕使用前缀异或和，其复杂度也是<span
+class="math inline">\(\Theta(N^2)\)</span>，难以接受，故不能直接暴力计算其异或子序列之和，考虑计算不同序列的个数直接计算。可以将每个序列考虑拆成2的幂次相加的形式，即2进制表达。考虑异或操作的独立性，分别对于每一个二进制位统计其前缀和，单独的01序列方便直接判断其是否产生贡献，那么对于所有01序列，那么其产生的贡献次数为<span
+class="math inline">\(num_1*num_0\)</span>，最终统计答案的时候，使用贡献次数乘上此时的系数即2的幂次。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">ll N, A[MAXN], S[MAXN][<span class="number">32</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;A[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">32</span>; k++)</span><br><span class="line">            S[i][k] = S[i - <span class="number">1</span>][k] ^ ((A[i] &gt;&gt; k) &amp; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">32</span>; k++) &#123;</span><br><span class="line">        ll num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (S[i][k])</span><br><span class="line">                num++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans += num * (N - num + <span class="number">1</span>) * (<span class="number">1</span> &lt;&lt; k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>二进制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P4317题解</title>
+    <url>/posts/b0e6c31/</url>
+    <content><![CDATA[<p> 要求计算<span
+class="math inline">\(\prod_{i=1}^{N}sum(i)\)</span>的值，N足够大，<span
+class="math inline">\(sum(i)\)</span>是二进制表达中1的个数。可以打标出<span
+class="math inline">\(sum(i)\)</span>的个数，那么从1到8的<span
+class="math inline">\(sum\)</span>值对应如下</p>
+<table>
+<thead>
+<tr class="header">
+<th>i</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(sum(i)\)</span></td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>可以发现<span
+class="math inline">\(sum(i)\)</span>的值足够小，不超过其二进制位数的大小，故同样大小的<span
+class="math inline">\(sum(i)\)</span>会重复出现，因为目标式子是求积，故可以把目标式子改写为
+<span class="math display">\[
+\prod_{i=1}^{N}sum(i) = \prod_{j=1}^{tot}j^{G_j}
+\]</span> 其中<span class="math inline">\(j\)</span>为<span
+class="math inline">\(sum(i)\)</span>可能出现的值，<span
+class="math inline">\(G_j\)</span>对应着<span
+class="math inline">\(sum(i)=j\)</span>出现的次数。那么原题转化为求解<span
+class="math inline">\(G_j\)</span>，即对应不同值的<span
+class="math inline">\(sum(i)\)</span>出现次数。可以想到这是一个数位DP。</p>
+<p> 选取第一维度<span
+class="math inline">\(i\)</span>为当前进行到了二进制表达下的第<span
+class="math inline">\(i\)</span>位，因为是对二进制位进行操作，所以不需要考虑此时在最高位的数字是什么，可以省下一维。故第二维<span
+class="math inline">\(j\)</span>表示当前统计的是<span
+class="math inline">\(sum(x)=j\)</span>的个数。整体状态<span
+class="math inline">\(f[i][j]\)</span>表示，当二进制最高位为<span
+class="math inline">\(i\)</span>时，满足<span
+class="math inline">\(sum(x)=j\)</span>的<span
+class="math inline">\(x\)</span>的数量。</p>
+<p> 那么可以知道计算<span class="math inline">\(f\)</span>的转移方程为
+<span class="math display">\[
+f[i][j] = \sum_{k=j-1}^{i-1}f[k][j-1]
+\]</span>  因为<span
+class="math inline">\(f[i][j]\)</span>表示当前的二进制位中有<span
+class="math inline">\(j\)</span>个1且 最高位的1在第<span
+class="math inline">\(i\)</span>位上，那么其个数应该由二进制表达中有<span
+class="math inline">\(j-1\)</span>个1的状态转移而来，因为此时确定了最高位为<span
+class="math inline">\(i\)</span>那么枚举第一维的上限应该就是<span
+class="math inline">\(i-1\)</span>，所以应该枚举最高位可能出现的位置，并将对应的值相加作为<span
+class="math inline">\(f[i][j]\)</span>的值。</p>
+<p> 对于答案的统计，首先明确，分开统计不同<span
+class="math inline">\(sum(x)\)</span>取值，依次枚举，不妨假设需要统计<span
+class="math inline">\(sum(x)=j\)</span>， 开始依次枚举<span
+class="math inline">\(j\)</span>。接下来，对于给出的上限<span
+class="math inline">\(N\)</span>，从它的二进制最高位到最低位开始枚举（从高位到低位枚举，保证统计的内容来源一定时小于<span
+class="math inline">\(N\)</span>的数，这一点与比大小的过程相同）</p>
+<p> 取<span class="math inline">\(N\)</span>的二进制表达为<span
+class="math inline">\(a_1,a_2,a_3,\dots,a_n\)</span>，</p>
+<ul>
+<li>如果此时<span
+class="math inline">\(a_i=1\)</span>，那么计算当第<span
+class="math inline">\(i\)</span>位为0时，剩余位数产生的贡献即<span
+class="math inline">\(f[i-1][tmp]\)</span>，其中<span
+class="math inline">\(tmp\)</span>表示为统计目标值<span
+class="math inline">\(j\)</span>减去从<span
+class="math inline">\(n\)</span>的二进制表达中第<span
+class="math inline">\(i\)</span>位到<span
+class="math inline">\(n\)</span>位中的已确定的1的数量，表示为<span
+class="math inline">\(tmp = j -
+num_1\)</span>，如果发现现在计算完成后，计算上当前位置上的1后即<span
+class="math inline">\(num_1+1\)</span>，大于目标<span
+class="math inline">\(j\)</span>，那么不再进行枚举，因为<span
+class="math inline">\(num_1+1&gt;j\)</span>说明在确定完这一位之后，无论后续怎么枚举，含有的1个数总会多于目标<span
+class="math inline">\(j\)</span>，故跳出循环，开始枚举下一个<span
+class="math inline">\(j\)</span>.</li>
+<li>如果此时<span class="math inline">\(a_i=0\)</span>，那么跳过。</li>
+</ul>
+<p>计算完成后继续枚举<span
+class="math inline">\(a_{i-1}\)</span>位。在完成枚举到最低的二进制位之后，那么如果目标位数<span
+class="math inline">\(j\)</span>与<span
+class="math inline">\(N\)</span>本身含有的1的个数相同，即<span
+class="math inline">\(tmp=j-num_1=0\)</span>时，<span
+class="math inline">\(N\)</span>本身会对目标<span
+class="math inline">\(j\)</span>产生贡献，需要最后补上本身带来的贡献。</p>
+<p> 最终对于输出的答案，按需要计算幂次即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MOD 10000007</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 55</span></span><br><span class="line">ll dp[MAXN][MAXN];</span><br><span class="line">ll G[MAXN];</span><br><span class="line">ll ans = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> a[MAXN], tot = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; MAXN; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = j - <span class="number">1</span>; k &lt; i; k++) &#123;</span><br><span class="line">                dp[i][j] += dp[k][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">quickpow</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    ll ret = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) ret = ret * a % MOD;</span><br><span class="line">        a = a * a % MOD;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">while</span> (n) &#123;</span><br><span class="line">        a[++tot] = n % <span class="number">2</span>;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= tot; j++) &#123;</span><br><span class="line">        <span class="type">int</span> tmp = j;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = tot; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i]) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = tmp; k &lt; i; k++)</span><br><span class="line">                    G[j] += dp[k][tmp];</span><br><span class="line">                <span class="keyword">if</span> (tmp == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">                tmp--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span> &amp;&amp; tmp == <span class="number">0</span>) G[j] += dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= tot; i++) &#123;</span><br><span class="line">        ans = ans * <span class="built_in">quickpow</span>(i, G[i]) % MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>数位DP</tag>
+      </tags>
+  </entry>
 </search>
