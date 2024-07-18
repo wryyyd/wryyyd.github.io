@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>P1542题解</title>
-    <url>/posts/84e5ff3c/</url>
-    <content><![CDATA[<p> 这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 200005</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">long</span> <span class="type">double</span> ti;</span><br><span class="line"><span class="type">int</span> x[MAXN], y[MAXN], s[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">long</span> <span class="type">double</span> v)</span> </span>&#123;</span><br><span class="line">    ti = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        ti += (<span class="type">long</span> <span class="type">double</span>)s[i] / v;</span><br><span class="line">        <span class="keyword">if</span> (ti &gt; y[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (ti &lt; x[i]) ti = x[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x[i], &amp;y[i], &amp;s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> l = <span class="number">0.0</span>, r = <span class="number">1e9</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> mid;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">        mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid))</span><br><span class="line">            r = mid - <span class="number">1e-7</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l = mid + <span class="number">1e-7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2Lf\n&quot;</span>, l);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>P1247题解</title>
     <url>/posts/b2bcbd52/</url>
     <content><![CDATA[<p> 对于取火柴的题目，就是取石子即Nim均衡，如果每个堆的大小异或起来为0，那么此时必输，那么找必胜策略的方法为对于其中一个堆，取出石子使得剩下的石子的个数等于其余堆的异或和。
@@ -21,6 +14,13 @@
         <tag>博弈论</tag>
         <tag>NIM均衡</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>P1542题解</title>
+    <url>/posts/84e5ff3c/</url>
+    <content><![CDATA[<p> 这道题在于找到一个最小的速度，通过这个速度能够满足要求的跑完全程。可以直接二分速度来设置上限，对于速度可以小的路径段，早到了位置可以进行等待。故正确性可以保证。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 200005</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">long</span> <span class="type">double</span> ti;</span><br><span class="line"><span class="type">int</span> x[MAXN], y[MAXN], s[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">long</span> <span class="type">double</span> v)</span> </span>&#123;</span><br><span class="line">    ti = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        ti += (<span class="type">long</span> <span class="type">double</span>)s[i] / v;</span><br><span class="line">        <span class="keyword">if</span> (ti &gt; y[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (ti &lt; x[i]) ti = x[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x[i], &amp;y[i], &amp;s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> l = <span class="number">0.0</span>, r = <span class="number">1e9</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> mid;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">        mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid))</span><br><span class="line">            r = mid - <span class="number">1e-7</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l = mid + <span class="number">1e-7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2Lf\n&quot;</span>, l);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
   </entry>
   <entry>
     <title>P1972题解</title>
@@ -163,6 +163,7 @@ class="math inline">\(\Theta(KNM)\)</span>，由于更新方程只与上一个�
         <tag>动态规划</tag>
         <tag>树形DP</tag>
         <tag>环</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
   <entry>
@@ -458,6 +459,244 @@ class="math inline">\(j\)</span>产生贡献，需要最后补上本身带来的
       <tags>
         <tag>动态规划</tag>
         <tag>数位DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P4756题解</title>
+    <url>/posts/74df3873/</url>
+    <content><![CDATA[<p> 题目要求<span
+class="math inline">\(\max(\sum_{k=i}^{j}|a_k|)\)</span>，此时记前<span
+class="math inline">\(i\)</span>位的前缀和为<span
+class="math inline">\(S_i\)</span>，那么可以可以写成<span
+class="math inline">\(\max(|S_i-S_j|)\)</span>，因为有绝对值，所以就成了找到最大的前缀和和最小的前缀和。那么每一次查询对应的<span
+class="math inline">\(x\)</span>，就需要去找一次序列最大值和最小值，设查询次数为<span
+class="math inline">\(T\)</span>，那么此时的复杂度应该为<span
+class="math inline">\(\Theta(TN)\)</span>，复杂度难以接受，故考虑优化这个过程。</p>
+<p> 题目要求的是每一次都是在初始序列上加上一个值<span
+class="math inline">\(x_i\)</span>，只是<span
+class="math inline">\(x_i\)</span>的大小与上一次查询输出的结果相关，故是强制在线的一个过程。</p>
+<p> 那么对于在<span
+class="math inline">\(i\)</span>位处的前缀和在加上了<span
+class="math inline">\(x\)</span>之后，其值变成<span
+class="math inline">\(i\times x +
+S_i\)</span>事实上，对于每个点来说，每一次修改<span
+class="math inline">\(x\)</span>后，可以用上式得到此时这个点处的前缀和，因为<span
+class="math inline">\(x\)</span>不确定，那么可以看出，每个点处实际维护了一条直线，直线方程为</p>
+<p><span class="math display">\[
+y = i\times x+S_i
+\]</span></p>
+<p> 那么这道题转化为每次查询找到对应带入<span
+class="math inline">\(x\)</span>后最小的直线，和最大的直线，并求对应<span
+class="math inline">\(y\)</span>相减之后的结果。因为一直采用的是初始序列那么说明直线不变，是一个静态的过程，（不用采用李超线段树这种功能更为强大的数据结构）可以采用凸包的知识，维护一个上凸包来维护各个区间上的能够取最大值的直线，同理，维护一个下凸包来维护各个区间上的能够取得最小值的直线，那么每次查询就变成了找到对应的<span
+class="math inline">\(x\)</span>在具体的哪条直线上，求出对应的值，并相减就是答案，那么找<span
+class="math inline">\(x\)</span>的过程可以使用二分法，那么整体的效率就是<span
+class="math inline">\(\Theta(T\log N)\)</span></p>
+<p> 相对于普通的凸包板，此时给定的是直线而非线上的点，那么需要修改整个过程，就不用选点和对点进行排序，在这道题中按照斜率从小到大的过程对直线进行枚举，那么就是按照从1到<span
+class="math inline">\(N\)</span>依次进行，同样维护一个栈，栈中存合法的直线的编号。</p>
+<p> 那么以维护最大值为例，判断栈顶直线是否出栈的条件在于当前的直线与栈顶直线的交点是否在当前直线与栈顶下一个元素的直线右侧，若在，那么不出栈，若不在那么出栈。对于输入的<span
+class="math inline">\(x\)</span>，使用二分法找到对应在那条直线上，求出对应解。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 200005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="type">int</span> m, n;</span><br><span class="line"><span class="type">int</span> ans_max[MAXN], max_top;</span><br><span class="line"><span class="type">int</span> ans_min[MAXN], min_top;</span><br><span class="line">ll s[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Graham</span> &#123;</span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">double</span> <span class="title">calcnode</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">double</span>)(s[b] - s[a]) / (a - b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        max_top = <span class="number">0</span>;</span><br><span class="line">        min_top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (max_top &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">calcnode</span>(ans_max[max_top - <span class="number">1</span>], i) &gt;= <span class="built_in">calcnode</span>(ans_max[max_top], i)) max_top--;</span><br><span class="line">            ans_max[++max_top] = i;</span><br><span class="line">            <span class="keyword">while</span> (min_top &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">calcnode</span>(ans_min[min_top - <span class="number">1</span>], i) &lt;= <span class="built_in">calcnode</span>(ans_min[min_top], i)) min_top--;</span><br><span class="line">            ans_min[++min_top] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">get_info</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">        s[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, tmp; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;tmp);</span><br><span class="line">            s[i] = s[i - <span class="number">1</span>] + tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">init</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ll <span class="title">solve</span><span class="params">(ll x, ll pre)</span> </span>&#123;</span><br><span class="line">        x = (x + pre) % (<span class="number">4</span> * n + <span class="number">1</span>) - <span class="number">2</span> * n;</span><br><span class="line">        <span class="type">int</span> mxl = <span class="number">1</span>, mxr = max_top;</span><br><span class="line">        <span class="keyword">while</span> (mxl &lt; mxr) &#123;</span><br><span class="line">            <span class="type">int</span> mid = (mxl + mxr) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">calcnode</span>(ans_max[mid], ans_max[mid + <span class="number">1</span>]) &gt; (<span class="type">double</span>)x)</span><br><span class="line">                mxr = mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">calcnode</span>(ans_max[mid], ans_max[mid + <span class="number">1</span>]) == x) &#123;</span><br><span class="line">                mxl = mid;</span><br><span class="line">                mxr = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span></span><br><span class="line">                mxl = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mnl = <span class="number">1</span>, mnr = min_top;</span><br><span class="line">        <span class="keyword">while</span> (mnl &lt; mnr) &#123;</span><br><span class="line">            <span class="type">int</span> mid = (mnl + mnr) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">calcnode</span>(ans_min[mid], ans_min[mid + <span class="number">1</span>]) &lt; (<span class="type">double</span>)x)</span><br><span class="line">                mnr = mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">calcnode</span>(ans_min[mid], ans_min[mid + <span class="number">1</span>]) == x) &#123;</span><br><span class="line">                mnl = mid;</span><br><span class="line">                mnr = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span></span><br><span class="line">                mnl = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (ll)(ans_max[mxl] - ans_min[mnl]) * x + s[ans_max[mxl]] - s[ans_min[mnl]];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Graham graham;</span><br><span class="line">    graham.<span class="built_in">get_info</span>();</span><br><span class="line">    ll pre = <span class="number">0</span>, x;</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;x);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, pre = graham.<span class="built_in">solve</span>(x, pre));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>凸包</tag>
+        <tag>二分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P5049题解</title>
+    <url>/posts/c59e4ef3/</url>
+    <content><![CDATA[<p> 对于按照题目给出的条件，可以分为两种不同的情况去讨论，第一种是<span
+class="math inline">\(m=n-1\)</span>即构成一颗树的情况，第二种情况下<span
+class="math inline">\(m=n\)</span>，整张图有且只有一个简单的环，除环上所有的点外，其余点构成一棵树。</p>
+<p> 对于第一种情况，根据题目要求，每一次向前走只能走到一个之前没走到的位置，或者沿着原路返回，并要求遍历完所有的点，那么这个遍历顺序就和树的遍历顺序一致，树的遍历过程符合上述的要求。要求最小字典序，可以知道这是一个贪心的过程。那么在遍历树的时候，优先选择编号小的子节点进行遍历，最终得到的遍历顺序就是最小的。</p>
+<p> 对于第二种情况，对于不在环上的点，与第一种情况相同。对于在环上的点，按照出边点的大小从小到大依次枚举，只讨论下一个点仍然在环上的情况。</p>
+<p> 需要明确，在一个环上，最多只能回溯一次，即回溯一次后，剩下的点与第一种情况相同。即在环上回溯的操作相当于删去了一条边，而对于只有一个环的情况，那么只可能删去一条边即回溯一次。</p>
+<p> 对于如果下一个点仍然在环上，如果在这个点处需要进行回溯，那么需要这个点的出边中，所有不在环上的相连点已经访问过了，即如果按照从小到大的顺序排序依次访问，且这个环上没有其他点回溯过，否则不能访问所有的点，条件转化为，目标点仍在环上的边是否是最后一条边且这个环从未回溯过。那么是否选择回溯，看回溯后的第一个访问的节点和不回溯访问的环上点谁的标号大，如果回溯后的结果更佳，那么选择回溯。如果不能回溯，即有目标点比环上点的标号大的边，即除了目标点为环上的边之外，还有边没有访问过，那么就更新回溯后第一次访问的点值改为目标点。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span> &#123;</span><br><span class="line">    <span class="type">int</span> to, nxt;</span><br><span class="line">&#125; e[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">    <span class="type">int</span> u, to;</span><br><span class="line">&#125; edgenode[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> head[MAXN], ecnt, n, m;</span><br><span class="line"><span class="type">int</span> ans[MAXN], nowtop;</span><br><span class="line"><span class="type">int</span> pre[MAXN], lsbranch;</span><br><span class="line"><span class="type">bool</span> isring[MAXN], flag, retrivflag, vis[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">addEdge</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    e[++ecnt].to = v;</span><br><span class="line">    e[ecnt].nxt = head[u];</span><br><span class="line">    head[u] = ecnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>&#123;</span><br><span class="line">    ans[++nowtop] = u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = e[i].nxt) &#123;</span><br><span class="line">        <span class="type">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.to &gt; b.to;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_ring</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (flag) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (pre[u]) &#123;</span><br><span class="line">        <span class="keyword">while</span> (fa != u) &#123;</span><br><span class="line">            isring[fa] = <span class="literal">true</span>;</span><br><span class="line">            fa = pre[fa];</span><br><span class="line">        &#125;</span><br><span class="line">        isring[u] = <span class="literal">true</span>;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pre[u] = fa;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = e[i].nxt) &#123;</span><br><span class="line">        <span class="type">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> (v == fa || flag) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">get_ring</span>(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfsring</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    ans[++nowtop] = u;</span><br><span class="line">    vis[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (isring[u] &amp;&amp; !retrivflag) &#123;</span><br><span class="line">        <span class="type">bool</span> tmpflag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = e[i].nxt) &#123;</span><br><span class="line">            <span class="type">int</span> v = e[i].to;</span><br><span class="line">            <span class="keyword">if</span> (vis[v]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (isring[v]) &#123;</span><br><span class="line">                <span class="type">int</span> j = e[i].nxt;</span><br><span class="line">                <span class="keyword">while</span> (vis[e[j].to]) j = e[j].nxt;</span><br><span class="line">                <span class="keyword">if</span> (j) &#123;</span><br><span class="line">                    lsbranch = e[j].to;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v &gt; lsbranch) &#123;</span><br><span class="line">                    retrivflag = <span class="literal">true</span>;</span><br><span class="line">                    tmpflag = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = e[i].nxt) &#123;</span><br><span class="line">            <span class="type">int</span> v = e[i].to;</span><br><span class="line">            <span class="keyword">if</span> (vis[v]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (isring[v] &amp;&amp; tmpflag) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">dfsring</span>(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i; i = e[i].nxt) &#123;</span><br><span class="line">            <span class="type">int</span> v = e[i].to;</span><br><span class="line">            <span class="keyword">if</span> (vis[v]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">dfsring</span>(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, u, v; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;u, &amp;v);</span><br><span class="line">        edgenode[i].to = v;</span><br><span class="line">        edgenode[i].u = u;</span><br><span class="line">        edgenode[i + m].to = u;</span><br><span class="line">        edgenode[i + m].u = v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(edgenode + <span class="number">1</span>, edgenode + <span class="number">2</span> * m + <span class="number">1</span>, cmp);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">2</span> * m; i++) &#123;</span><br><span class="line">        <span class="built_in">addEdge</span>(edgenode[i].u, edgenode[i].to);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (m == n - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">get_ring</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    lsbranch = <span class="number">2</span> * n;</span><br><span class="line">    <span class="built_in">dfsring</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>环</tag>
+        <tag>图论</tag>
+        <tag>树的遍历</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P5197题解</title>
+    <url>/posts/19df343c/</url>
+    <content><![CDATA[<p> 对于这道题，题目需要具体的颜色数目，而不需要颜色是如何分配的，那么需要计算的就不是颜色的具体方案，而是颜色的个数。</p>
+<p> 对于题目中的要求，对于其中的某一个点来说，以这个点作为根，可以发现，至少需要它的出度+1个颜色来进行填色。下面说明，这道题在树的情况下，其需要的最少颜色就是所有点的出度+1中的最大值</p>
+<p> 首先可以发现图中构成一棵树，故无法出现如下图所示的图形</p>
+<figure>
+<img src="image.png" alt="示例图片" />
+<figcaption aria-hidden="true">示例图片</figcaption>
+</figure>
+<p>在上图中，可以注意到统计节点1得到的答案为3，但是仅用三种颜色，无论如何选择，节点4都无法用这三种颜色进行填色。</p>
+<p> 考虑在树中的情况，假设现在得到了树的最大出度+1为<span
+class="math inline">\(ans\)</span>，且从上到下分配颜色，对于一个未分配颜色的节点<span
+class="math inline">\(x\)</span>，其首先受到的限制为其父节点<span
+class="math inline">\(fa[x]\)</span>和父节点的父节点<span
+class="math inline">\(fa[fa[x]]\)</span>的颜色影响。那么可以分情况讨论</p>
+<ol type="1">
+<li>不存在<span class="math inline">\(fa[fa[x]]\)</span>节点</li>
+<li>存在<span class="math inline">\(fa[fa[x]]\)</span>节点</li>
+</ol>
+<p> 首先对于不存在<span
+class="math inline">\(fa[fa[x]]\)</span>的情况，那么对于节点<span
+class="math inline">\(x\)</span>，其一共可以有<span
+class="math inline">\(ans-1\)</span>种选择颜色选择，而有<span
+class="math inline">\(ans\geq 2\)</span>，那么显然可以有合法的方案。</p>
+<p> 对于<span
+class="math inline">\(fa[fa[x]]\)</span>存在，那么对于对于节点<span
+class="math inline">\(x\)</span>，其能够选择的颜色方案就有<span
+class="math inline">\(ans-2\)</span>个，在存在<span
+class="math inline">\(fa[fa[x]]\)</span>的情况下，<span
+class="math inline">\(fa[x]\)</span>能够产生至少3的贡献，即此时<span
+class="math inline">\(ans\geq 3\)</span>，那么显然对于该节点<span
+class="math inline">\(x\)</span>，显然有合法的选择方案。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 100005</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> vis[MAXN], ans;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, u, v; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;u, &amp;v);</span><br><span class="line">        vis[u]++;</span><br><span class="line">        vis[v]++;</span><br><span class="line">        ans = <span class="built_in">max</span>(ans, <span class="built_in">max</span>(vis[u], vis[v]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P7521题解</title>
+    <url>/posts/7e7c9c61/</url>
+    <content><![CDATA[<p> 这道题要求求一个序列中找到三个数<span
+class="math inline">\(a_i,a_j,a_k\)</span>，且<span
+class="math inline">\(i,j,k\)</span>互不相同，满足<span
+class="math inline">\((a_i+a_j)\% a_k\)</span>的值最大。</p>
+<p> 首先想到暴力解法，首先枚举模数<span
+class="math inline">\(a_k\)</span>,接着进行排列开始枚举<span
+class="math inline">\(a_i,a_j\)</span>，这样的方法的时间复杂度为<span
+class="math inline">\(\Theta(n^3)\)</span>，找<span
+class="math inline">\(a_i, a_j\)</span>的过程可以进行优化。</p>
+<p> 对于公式有 <span class="math display">\[
+    (a_i+a_j)\%a_k=(a_i\%a_k+a_j\%a_k)\%a_k
+\]</span>
+a序列自身的顺序并不影响最后的结果，故可以把a序列进行排序，对于每一次枚举，先对所有的除模数之外的点取模后形成新的序列b后进行排序。</p>
+<p> 两数相加之中，首先为了不重复枚举组合，不妨设<span
+class="math inline">\(b_i\leq b_j\)</span>,即在排序后有序号下标<span
+class="math inline">\(i&lt;j\)</span>，对于这样一个数<span
+class="math inline">\(b_i\)</span>，有<span
+class="math inline">\(b_i+b_j\leq2*a_k\)</span>，现在总共可能出现两种不同的情况</p>
+<ol type="1">
+<li><span class="math inline">\(b_i+b_j&lt;a_k\)</span></li>
+<li><span class="math inline">\(b_i+b_j\geq a_k\)</span></li>
+</ol>
+<p> 因为<span class="math inline">\(b\)</span>数组取模后形成，有<span
+class="math inline">\(\forall i\quad 0\leq
+b_i&lt;a_k\)</span>，对于情况2来说<span
+class="math inline">\((b_i+b_j)\%a_k\)</span>的值一定会小于<span
+class="math inline">\(b_j\)</span>，而情况1下，<span
+class="math inline">\((b_i+b_j)\%a_k\)</span>的值一定大于<span
+class="math inline">\(b_j\)</span>，所以寻找的策略可以确定为优先去找到最大的使得<span
+class="math inline">\((b_i+b_j)&lt;a_k\)</span>的<span
+class="math inline">\(b_i\)</span>，当无法找到这样的<span
+class="math inline">\(b_i\)</span>时，那么使得<span
+class="math inline">\(b_i\)</span>尽可能的大，即<span
+class="math inline">\(i=j-1\)</span>，计算答案。</p>
+<p> 考虑进一步优化这个策略，可以从大到小开始枚举<span
+class="math inline">\(b_j\)</span>，当上一个<span
+class="math inline">\(b_j\)</span>对应的<span
+class="math inline">\(b_i\)</span>值找到后，一共只有两种情况</p>
+<ol type="1">
+<li><span class="math inline">\(i&lt;j\)</span></li>
+<li><span class="math inline">\(i\)</span>不存在，强制选择<span
+class="math inline">\(b_{j-1}\)</span>作为<span
+class="math inline">\(b_i\)</span>计算答案</li>
+</ol>
+<p>计<span class="math inline">\(t\)</span>为第一个使得<span
+class="math inline">\((b_i+b_j)\geq a_k\)</span>的<span
+class="math inline">\(b_i\)</span>的下标，显然有<span
+class="math inline">\(t\leq j\)</span>，对于第一种情况，<span
+class="math inline">\(t&gt;1\)</span>，对于第二种情况，<span
+class="math inline">\(t=1\)</span>。</p>
+<p> 设<span class="math inline">\(b_j\)</span>对于得到的下标为<span
+class="math inline">\(t_j\)</span>，那么对于<span
+class="math inline">\(b_{j-1}\)</span>来说，因为<span
+class="math inline">\(b_{j-1}&lt;b_j\)</span>那么在<span
+class="math inline">\(t_j\)</span>之前的数一定满足条件，即<span
+class="math inline">\(\forall i&lt;t_j,\quad
+b_i+b_{j-1}&lt;a_k\)</span>，那么对于<span
+class="math inline">\(b_{j-1}\)</span>来说，只需要从<span
+class="math inline">\(t_j\)</span>开始验证两数之和是否小于<span
+class="math inline">\(a_k\)</span>，直到找到一个大于<span
+class="math inline">\(a_k\)</span>的组合或者枚举到<span
+class="math inline">\(j-1\)</span>这个点，即表示<span
+class="math inline">\(j-1\)</span>之前的点均满足条件。</p>
+<p> 如果这样的过程中，如果一开始<span
+class="math inline">\(j-1&lt;t_j\)</span>，这种情况证明<span
+class="math inline">\(b_{j-1}+b_j&lt;a_k\)</span>，那么有<span
+class="math inline">\(b_{j-2}+b_{j-1}&lt;b_{j-1}+b_j&lt;a_k\)</span>,故可以直接将<span
+class="math inline">\(t_{j-1}\)</span>赋值为<span
+class="math inline">\(j-1\)</span></p>
+<p> 具体枚举每个数对应的<span
+class="math inline">\(b_i\)</span>的运行次数不确定，与自身的大小和模数大小相关，但是整体来说，每个数在同一个模数的情况下，只会被计算一次。故将暴力枚举<span
+class="math inline">\(\Theta(n^2)\)</span>的复杂度将为了<span
+class="math inline">\(\Theta(n)\)</span></p>
+<p> 这样的策略可以使得当确定了<span
+class="math inline">\(a_k\)</span>后找<span
+class="math inline">\(a_i,a_j\)</span>的过程的复杂度变为<span
+class="math inline">\(\Theta(n\log
+n)\)</span>，那么整体的复杂度来到了<span
+class="math inline">\(\Theta(n^2\log n)\)</span>，</p>
+<p> 考虑枚举模数的顺序，考虑从大到小枚举，模数越大，两数之和才可能越大，在模数大的情况下取得答案的可能性大于模数小的情况下。可以有如下两个剪枝</p>
+<ul>
+<li>相同值只枚举一次，因为模数相同的情况下，形成的<span
+class="math inline">\(b\)</span>相同</li>
+<li>如果之前得到的答案已经大于当前模数-1，那么之后得到的和不可能比之前的答案更大，直接跳出并输出答案。</li>
+</ul>
+<p> 按照上述的剪枝，最后可以在时间复杂度要求内得到答案，那么显然一定是第二个剪枝使得时间复杂度可以接受，下面说明在第二个剪枝下，算法的时间复杂度降为<span
+class="math inline">\(\Theta(n\log n\log V)\)</span>，其中<span
+class="math inline">\(V\)</span>是数组中数最大可能的上限，在这种情况下<span
+class="math inline">\(\Theta(\log
+V)\)</span>可以看作是常数，算法降为<span
+class="math inline">\(\Theta(n\log n)\)</span></p>
+<p> 设此时选取的模数为<span
+class="math inline">\(a_k\)</span>，在第<span
+class="math inline">\(k\)</span>位到第<span
+class="math inline">\(n\)</span>的数完成了枚举，之前得到的答案为<span
+class="math inline">\(ans\)</span>，不妨设 <span class="math display">\[
+    a_1\leq a_2\leq\dots\leq ans\leq a_k\leq a_{k+1}\leq\dots\leq a_n
+\]</span> 那么显然有如下不等式成立 <span class="math display">\[
+    \forall i\in[k,n-2],\quad ans\geq (a_i+a_{i+1})\%a_{i+2}
+\]</span>
+因为不等式右侧为答案的一种组成且不一定就是最优解。可以将不等式改写成
+<span class="math display">\[
+    \forall i\in[k,n-2],\quad ans\geq a_i+a_{i+1}-a_{i+2}
+\]</span> 进一步改写不等式，可以变成 <span class="math display">\[
+    \forall i\in[k,n-2],\quad (a_{i+2}-ans)\geq (a_i-ans)+(a_{i+1}-ans)
+\]</span> 不妨设<span
+class="math inline">\(f_n=a_n-ans\)</span>，那么上式可以写成 <span
+class="math display">\[
+    \forall i\in[k,n-2],\quad f_{i+2}\geq f_{i+1}+f_i
+\]</span> 那么说明在最极端的情况下，大于<span
+class="math inline">\(ans\)</span>的值构成一个斐波那契数列，斐波那契数列成指数级增长，通项公式为<span
+class="math inline">\(((\frac{\sqrt{5}+1}{2})^n+(\frac{\sqrt{5}-1}{2})^n)\)</span>，而最大值<span
+class="math inline">\(a_n\)</span>不超过1e8，那么<span
+class="math inline">\(ans\)</span>落在从后向前数<span
+class="math inline">\(log(1e8)\)</span>级别的位置，故只用枚举的效率是常数级。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 200005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n, a[MAXN], b[MAXN], ans_max;</span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> tmp = n; tmp &gt;= <span class="number">1</span>; tmp--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ans_max &gt; a[tmp] - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mp[a[tmp]] == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mp[a[tmp]] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> lenb = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == tmp) <span class="keyword">continue</span>;</span><br><span class="line">            b[++lenb] = a[i] % a[tmp];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(b + <span class="number">1</span>, b + lenb + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> r = lenb, l = <span class="number">1</span>; r &gt;= <span class="number">1</span>; r--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l &gt; r) &#123;</span><br><span class="line">                l = r;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r &amp;&amp; b[r] + b[l] &lt; a[tmp]) l++;</span><br><span class="line">            <span class="keyword">if</span> (l - <span class="number">1</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ans_max = <span class="built_in">max</span>(ans_max, b[l - <span class="number">1</span>] + b[r]);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ans_max = <span class="built_in">max</span>(ans_max, (b[r - <span class="number">1</span>] + b[r]) % a[tmp]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans_max);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>洛谷题解</category>
+      </categories>
+      <tags>
+        <tag>滑动窗口</tag>
+        <tag>剪枝</tag>
+        <tag>暴力</tag>
+        <tag>取模</tag>
       </tags>
   </entry>
 </search>
